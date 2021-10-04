@@ -1,5 +1,6 @@
-class BeachesController < ApplicationController
-  before_action :set_beach, only: [:show, :update, :destroy]
+class BeachesController < SecuredController
+  skip_before_action :authorize_request, only: %i[index show]
+  before_action :set_beach, only: %i[show update destroy]
 
   # GET /beaches
   def index
@@ -39,13 +40,14 @@ class BeachesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_beach
-      @beach = Beach.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def beach_params
-      params.require(:beach).permit(:name, :country, :city, :address, :rating, :image, :details)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_beach
+    @beach = Beach.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def beach_params
+    params.require(:beach).permit(:name, :country, :city, :address, :rating, :image, :details)
+  end
 end

@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-200.times do 
+500.times do 
   Beach.create(
     name: Faker::Company.name,
     country: Faker::Address.country,
@@ -13,7 +13,10 @@
     address: Faker::Address.street_address,
     rating: Faker::Number.between(from: 1, to: 5),
     image: Faker::LoremPixel.image(size: "800x800", is_gray: false, category: 'nature'),
-    details: Faker::Lorem.paragraph(sentence_count: 3) 
+    details: Faker::Lorem.paragraph(sentence_count: 3),
+    email: Faker::Internet.email,
+    phone_number: Faker::PhoneNumber.cell_phone,
+    website: Faker::Internet.url
 
   )
 end

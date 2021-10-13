@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   scope '/auth' do
     post '/signin', to: 'user_token#create'
     post '/signup', to: 'user#create'
+    get '/me', to: 'user#index'
   end
 end
 

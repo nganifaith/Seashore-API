@@ -3,9 +3,17 @@ class BeachesController < ApplicationController
 
   # GET /beaches
   def index
-    @beaches = Beach.all
+    @beaches = Beach.where('name LIKE :term or country LIKE :term', { term: "%#{beach_filter_params['searchTerm']}%" })
+      .includes(:favorite)
+    if current_user && beach_filter_params['favourites'] == 'true'
+      @beaches = @beaches.where('favorites.user_id = ?', current_user.id).references(:favorite)
+    end
 
-    render json: @beaches
+    render json: @beaches.to_json(include: [:favorite])
+  end
+
+  def beach_filter_params
+    params.permit(:searchTerm, :favourites)
   end
 
   # GET /beaches/1
@@ -39,13 +47,14 @@ class BeachesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_beach
-      @beach = Beach.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def beach_params
-      params.require(:beach).permit(:name, :country, :city, :address, :rating, :image, :details)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_beach
+    @beach = Beach.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def beach_params
+    params.require(:beach).permit(:name, :country, :city, :address, :rating, :image, :details)
+  end
 end

@@ -4,12 +4,11 @@ class BeachesController < ApplicationController
   # GET /beaches
   def index
     @beaches = Beach.where('name LIKE :term or country LIKE :term', { term: "%#{beach_filter_params['searchTerm']}%" })
-      .includes(:favorite)
     if current_user && beach_filter_params['favourites'] == 'true'
-      @beaches = @beaches.where('favorites.user_id = ?', current_user.id).references(:favorite)
+      @beaches = @beaches.includes(:favorite).where('favorites.user_id = ?', current_user.id).references(:favorite)
     end
 
-    render json: @beaches.to_json(include: [:favorite])
+    render json: @beaches.to_json(:include => {:favorite => {:only => :user_id}})
   end
 
   def beach_filter_params

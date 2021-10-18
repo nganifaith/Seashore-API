@@ -1,5 +1,5 @@
 class BeachesController < ApplicationController
-  before_action :set_beach, only: [:show, :update, :destroy]
+  before_action :set_beach, only: %i[show update destroy]
 
   # GET /beaches
   def index
@@ -8,7 +8,7 @@ class BeachesController < ApplicationController
       @beaches = @beaches.includes(:favorite).where('favorites.user_id = ?', current_user.id).references(:favorite)
     end
 
-    render json: @beaches.to_json(:include => {:favorite => {:only => :user_id}})
+    render json: @beaches.to_json(include: { favorite: { only: :user_id } })
   end
 
   def beach_filter_params

@@ -13,7 +13,9 @@ class BeachesControllerTest < ActionDispatch::IntegrationTest
   test 'should create beach' do
     assert_difference('Beach.count') do
       post beaches_url,
-           params: { beach: { address: @beach.address, city: @beach.city, country: @beach.country, details: @beach.details, image: @beach.image, name: @beach.name, rating: @beach.rating } }, as: :json
+           params: { beach: { address: @beach.address, city: @beach.city, country: @beach.country,
+                              details: @beach.details, image: @beach.image, name: @beach.name,
+                              rating: @beach.rating } }, as: :json
     end
 
     assert_response 201
@@ -26,7 +28,9 @@ class BeachesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update beach' do
     patch beach_url(@beach),
-          params: { beach: { address: @beach.address, city: @beach.city, country: @beach.country, details: @beach.details, image: @beach.image, name: @beach.name, rating: @beach.rating } }, as: :json
+          params: { beach: { address: @beach.address, city: @beach.city, country: @beach.country,
+                             details: @beach.details, image: @beach.image, name: @beach.name,
+                             rating: @beach.rating } }, as: :json
     assert_response 200
   end
 

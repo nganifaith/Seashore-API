@@ -38,6 +38,10 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  gem 'shoulda-matchers'
+end
+
 gem 'bcrypt'
 gem 'knock'
 gem 'active_model_serializers'

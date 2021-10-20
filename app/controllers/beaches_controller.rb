@@ -8,7 +8,7 @@ class BeachesController < ApplicationController
       @beaches = @beaches.includes(:favorite).where('favorites.user_id = ?', current_user.id).references(:favorite)
     end
 
-    render json: @beaches.to_json(include: { favorite: { only: :user_id } })
+    render json: @beaches, each_serializer: BeachSerializer
   end
 
   def beach_filter_params

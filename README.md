@@ -39,9 +39,19 @@ git clone https://github.com/nganifaith/Seashore-API).
   rails s
 ```
 
-## Live site
+## SOME API END-POINTS
+```
+  baseUrl = 'http://localhost/3000'
+  1) baseUrl/beaches => to get all sites
 
-[Live](https://fervent-sinoussi-2ae78f.netlify.app/)
+  2) baseUrl/beaches?params => To get specific sites. Can be use for search or get favorites
+
+  3) baseUrl/favorite/set => Sets a user favorite
+  
+  4) baseUrl/favorite/delete => Remove a site from the lists of user's favorites
+```
+
+ 
 
 ## Author
 

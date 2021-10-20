@@ -13,7 +13,7 @@
     address: Faker::Address.street_address,
     rating: Faker::Number.between(from: 1, to: 5),
     image: Faker::LoremPixel.image(size: "800x800", is_gray: false, category: 'nature'),
-    details: Faker::Lorem.paragraph(sentence_count: 3),
+    details: Faker::Lorem.paragraph(sentence_count: 50),
     email: Faker::Internet.email,
     phone_number: Faker::PhoneNumber.cell_phone,
     website: Faker::Internet.url

@@ -54,6 +54,7 @@ class BeachesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def beach_params
-    params.require(:beach).permit(:name, :country, :city, :address, :rating, :image, :details)
+    params.require(:beach)
+      .permit(:name, :country, :city, :address, :rating, :featured_image, :details, :email, :phone_number, :website)
   end
 end

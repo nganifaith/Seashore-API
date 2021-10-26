@@ -10,7 +10,7 @@ class FavoritesController < ApplicationController
   end
 
   private
-  
+
   def favorite_params
     params.permit(:beach_id)
   end

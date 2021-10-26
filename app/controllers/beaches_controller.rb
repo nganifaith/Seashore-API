@@ -11,10 +11,6 @@ class BeachesController < ApplicationController
     render json: @beaches, each_serializer: BeachSerializer
   end
 
-  def beach_filter_params
-    params.permit(:searchTerm, :favourites)
-  end
-
   # GET /beaches/1
   def show
     render json: @beach
@@ -46,6 +42,10 @@ class BeachesController < ApplicationController
   end
 
   private
+
+  def beach_filter_params
+    params.permit(:searchTerm, :favourites)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_beach

@@ -6,7 +6,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    render json: Favorite.where(beach_id: favorite_params['beach_id'], user_id: current_user.id).destroy_all
+    render json: Favorite.delete_favorite(favorite_params['beach_id'], current_user.id).destroy_all
   end
 
   private

@@ -6,6 +6,6 @@ class Beach < ApplicationRecord
   validates :name, :country, :city, :rating, :details, presence: true
 
   scope :by_name, lambda { |name|
-   where('name LIKE :term or country LIKE :term', { term: "%#{name}%" })
+    where('lower(name) LIKE :term or country LIKE :term', { term: "%#{name.downcase}%" })
   }
 end

@@ -4,4 +4,8 @@ class Beach < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   has_one_attached :featured_image
   validates :name, :country, :city, :rating, :details, presence: true
+
+  scope :by_name, lambda { |name|
+   where('name LIKE :term or country LIKE :term', { term: "%#{name}%" })
+  }
 end

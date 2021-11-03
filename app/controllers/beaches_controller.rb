@@ -4,9 +4,7 @@ class BeachesController < ApplicationController
   # GET /beaches
   def index
     @beaches = Beach.by_name(beach_filter_params['searchTerm'])
-    if current_user && beach_filter_params['favourites'] == 'true'
-      @beaches = @beaches.includes(:favorite).where('favorites.user_id = ?', current_user.id).references(:favorite)
-    end
+    @beaches = @beaches.with_favorite(current_user.id) if current_user && beach_filter_params['favourites'] == 'true'
 
     render json: @beaches, each_serializer: BeachSerializer
   end

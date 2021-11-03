@@ -8,4 +8,8 @@ class Beach < ApplicationRecord
   scope :by_name, lambda { |name|
     where('lower(name) LIKE :term or country LIKE :term', { term: "%#{name.downcase}%" })
   }
+
+  scope :with_favorite, lambda { |user_id|
+    includes(:favorite).where('favorites.user_id = ?', user_id).references(:favorite)
+  }
 end
